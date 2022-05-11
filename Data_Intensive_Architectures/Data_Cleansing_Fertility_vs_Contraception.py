@@ -78,7 +78,7 @@ countries = ['Afghanistan', 'Albania', 'Algeria', 'Angola', 'Antigua and Barbuda
 df = df.loc[df['Entity'].isin(countries)]
 
 print("We now have a total of: ", df['Entity'].nunique(), "having removed all continents and unwanted countries",
-      "with an expected total of 194, which in our case is correct.", "\n")
+      "with an expected total of 193, which in our case is correct.", "\n")
 
 print("Below are the number of missing values within each column present: ", "\n", "\n", df.isnull().sum(), "\n")
 
