@@ -14,16 +14,16 @@ public class DIA_JAVA{
     public static class DeathMapper extends Mapper < Object, Text, Text, Text > {
         public void map(Object key, Text value, Context context) throws IOException, InterruptedException {
             String record = value.toString(); //Read each record
-            String[] parts = record.split(" "); // Parse CSV file
-            context.write(new Text(parts[0]), new Text("DEAT " + parts[1])); //Label Customers
+            String[] parts = record.split(","); // Parse CSV file
+            context.write(new Text(parts[0]), new Text("COUNTRY " + parts[1])); //Label Countries
         }
     }
 
     public static class FertilityMapper extends Mapper < Object, Text, Text, Text > {
         public void map(Object key, Text value, Context context) throws IOException, InterruptedException {
             String record = value.toString(); // Read each record
-            String[] parts =record.split(" "); // Parse CSV File
-            context.write(new Text (parts[0]), new Text ("FERT "+ parts[3])); // Label Transactions
+            String[] parts =record.split(","); // Parse CSV File
+            context.write(new Text (parts[0]), new Text ("DEATH "+ parts[3])); // Label Deaths
         }
     }
 
@@ -44,11 +44,11 @@ public class DIA_JAVA{
                 In this case this sections counts the number of customers and the number of transactions per customer along with their value */
             for (Text t : values) {
                 String parts[] = t.toString().split(" ");
-                if (parts[0].equals("FERT ")) {
-                    count++; // count the number of fertilities
-                    total += Float.parseFloat(parts[1]); // add up the fertility rates for every year
+                if (parts[0].equals("DEATH ")) {
+                    count++; // count the number of deaths
+                    total += Float.parseFloat(parts[1]); // add up the number of deaths for every year
 
-                } else if (parts[0].equals("DEAT ")) {
+                } else if (parts[0].equals("COUNTRY ")) {
                     name = parts[1];
                 }
                 ; // count the number of customers
