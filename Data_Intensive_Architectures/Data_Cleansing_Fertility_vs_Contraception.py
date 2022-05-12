@@ -94,6 +94,6 @@ def export():
 # Export to csv
         df.to_csv(
              "C:/Users/Rober/Downloads/Cleansed_Fertility-vs-Contraception.csv",
-            index=False, encoding='utf-8-sig', header=False)
+            index=False, encoding='utf-8-sig')
 
 export()
