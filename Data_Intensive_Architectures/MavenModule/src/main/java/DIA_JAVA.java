@@ -15,7 +15,7 @@ public class DIA_JAVA{
         public void map(Object key, Text value, Context context) throws IOException, InterruptedException {
             String record = value.toString(); //Read each record
             String[] parts = record.split(" "); // Parse CSV file
-            context.write(new Text(parts[1]), new Text("DEAT " + parts[3])); //Label Customers
+            context.write(new Text(parts[0]), new Text("DEAT " + parts[1])); //Label Customers
         }
     }
 
@@ -23,7 +23,7 @@ public class DIA_JAVA{
         public void map(Object key, Text value, Context context) throws IOException, InterruptedException {
             String record = value.toString(); // Read each record
             String[] parts =record.split(" "); // Parse CSV File
-            context.write(new Text (parts[1]), new Text ("FERT "+ parts[3])); // Label Transactions
+            context.write(new Text (parts[0]), new Text ("FERT "+ parts[3])); // Label Transactions
         }
     }
 
@@ -44,11 +44,11 @@ public class DIA_JAVA{
                 In this case this sections counts the number of customers and the number of transactions per customer along with their value */
             for (Text t : values) {
                 String parts[] = t.toString().split(" ");
-                if (parts[0].equals("DEAT ")) {
-                    count++; // count the number of deaths
-                    total += Float.parseFloat(parts[1]); // add up their total
+                if (parts[0].equals("FERT ")) {
+                    count++; // count the number of fertilities
+                    total += Float.parseFloat(parts[1]); // add up the fertility rates for every year
 
-                } else if (parts[0].equals("CUST ")) {
+                } else if (parts[0].equals("DEAT ")) {
                     name = parts[1];
                 }
                 ; // count the number of customers

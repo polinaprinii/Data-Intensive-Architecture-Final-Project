@@ -5,12 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e401754e-7041-4ad2-8e5f-a0aa5956ffe0" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MavenModule/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MavenModule/src/main/java/DIA_JAVA.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MavenModule/src/main/java/DIA_JAVA.java" beforeDir="false" afterPath="$PROJECT_DIR$/MavenModule/src/main/java/DIA_JAVA.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -121,6 +117,7 @@
       <workItem from="1652303594115" duration="190000" />
       <workItem from="1652379107746" duration="1131000" />
       <workItem from="1652380256322" duration="3965000" />
+      <workItem from="1652384580398" duration="236000" />
     </task>
     <servers />
   </component>
@@ -137,5 +134,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Data_Intensive_Architectures$Data_Cleansing_Annual_Deaths.coverage" NAME="Data_Cleansing_Annual_Deaths Coverage Results" MODIFIED="1652384677321" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Data_Intensive_Architectures$Data_Cleansing_Fertility_vs_Contraception.coverage" NAME="Data_Cleansing_Fertility_vs_Contraception Coverage Results" MODIFIED="1652384727691" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
