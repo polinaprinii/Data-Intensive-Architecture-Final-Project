@@ -82,6 +82,11 @@ print("We now have a total of: ", df['Entity'].nunique(), "having removed all co
 
 print("Below are the number of missing values within each column present: ", "\n", "\n", df.isnull().sum(), "\n")
 
+# Addressing null values:
+df['Fertility rate, total (births per woman)'] = df['Fertility rate, total (births per woman)'].fillna(0.01)
+df['Contraceptive prevalence, any methods (% of women ages 15-49)'] = df['Contraceptive prevalence, any methods (% of women ages 15-49)'].fillna(0.01)
+
+print("Below are the number of missing values within each column present: ", "\n", "\n", df.isnull().sum(), "\n")
 
 # To conclude we export the cleansed file:
 def export():
