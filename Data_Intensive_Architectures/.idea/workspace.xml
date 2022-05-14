@@ -43,7 +43,7 @@
     &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;
   }
 }</component>
-  <component name="RunManager" selected="Python.Merge">
+  <component name="RunManager" selected="Python.Data_Cleansing_Fertility_vs_Contraception">
     <configuration name="DIA_JAVA" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="DIA_JAVA" />
       <module name="MavenModule" />
@@ -141,9 +141,9 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.Merge" />
         <item itemvalue="Python.Data_Cleansing_Fertility_vs_Contraception" />
         <item itemvalue="Python.Data_Cleansing_Annual_Deaths" />
+        <item itemvalue="Python.Merge" />
         <item itemvalue="Python.Country_Table" />
       </list>
     </recent_temporary>
