@@ -40,45 +40,18 @@ discard = ["OWID_"]
 df = df[~df.Code.str.contains('|'.join(discard))]
 
 # Next we import a list derived from the cleansing of the annual deaths files to ensure same regions are covered.
-countries = ['Afghanistan', 'Albania', 'Algeria', 'Angola', 'Antigua and Barbuda',
- 'Argentina', 'Armenia', 'Aruba', 'Australia', 'Austria', 'Azerbaijan',
- 'Bahamas', 'Bahrain', 'Bangladesh', 'Barbados', 'Belarus', 'Belgium', 'Belize',
- 'Benin', 'Bhutan', 'Bolivia', 'Bosnia and Herzegovina', 'Botswana', 'Brazil',
- 'Brunei', 'Bulgaria', 'Burkina Faso', 'Burundi', 'Cambodia', 'Cameroon',
- 'Canada', 'Cape Verde', 'Chad', 'Chile', 'China', 'Colombia', 'Comoros', 'Congo',
- 'Costa Rica', "Cote d'Ivoire", 'Croatia', 'Cuba', 'Curacao', 'Cyprus',
- 'Czechia', 'Democratic Republic of Congo', 'Denmark', 'Djibouti',
- 'Dominican Republic', 'Ecuador', 'Egypt', 'El Salvador', 'Equatorial Guinea',
- 'Eritrea', 'Estonia', 'Eswatini', 'Ethiopia', 'Fiji', 'Finland', 'France',
- 'French Guiana', 'French Polynesia', 'Gabon', 'Gambia', 'Georgia', 'Germany',
- 'Ghana', 'Greece', 'Grenada', 'Guadeloupe', 'Guam', 'Guatemala', 'Guinea',
- 'Guinea-Bissau', 'Guyana', 'Haiti', 'Honduras', 'Hong Kong', 'Hungary',
- 'Iceland', 'India', 'Indonesia', 'Iran', 'Iraq', 'Ireland', 'Israel', 'Italy',
- 'Jamaica', 'Japan', 'Jordan', 'Kazakhstan', 'Kenya', 'Kiribati', 'Kuwait',
- 'Kyrgyzstan', 'Laos', 'Latvia', 'Lebanon', 'Lesotho', 'Liberia', 'Libya',
- 'Lithuania', 'Luxembourg', 'Macao', 'Madagascar', 'Malawi', 'Malaysia',
- 'Maldives', 'Mali', 'Malta', 'Martinique', 'Mauritania', 'Mauritius', 'Mayotte',
- 'Melanesia', 'Mexico', 'Moldova', 'Mongolia', 'Montenegro', 'Morocco',
- 'Mozambique', 'Myanmar', 'Namibia', 'Nepal', 'Netherlands', 'New Caledonia',
- 'New Zealand', 'Nicaragua', 'Niger', 'Nigeria', 'North Korea',
- 'North Macedonia', 'Norway', 'Oman', 'Pakistan', 'Palestine', 'Panama',
- 'Papua New Guinea', 'Paraguay', 'Peru', 'Philippines', 'Poland', 'Portugal',
- 'Puerto Rico', 'Qatar', 'Romania', 'Russia', 'Rwanda', 'Saint Lucia',
- 'Saint Vincent and the Grenadines', 'Samoa', 'Sao Tome and Principe',
- 'Saudi Arabia', 'Senegal', 'Serbia', 'Seychelles', 'Sierra Leone', 'Singapore',
- 'Slovakia', 'Slovenia', 'Solomon Islands', 'Somalia', 'South Korea', 'Spain',
- 'Sri Lanka', 'Sudan', 'Suriname', 'Sweden', 'Switzerland', 'Syria', 'Taiwan',
- 'Tajikistan', 'Tanzania', 'Thailand', 'Timor', 'Togo', 'Tonga',
- 'Trinidad and Tobago', 'Tunisia', 'Turkey', 'Turkmenistan', 'Uganda',
- 'Ukraine', 'United Arab Emirates', 'United Kingdom', 'United States',
- 'Uruguay', 'Uzbekistan', 'Vanuatu', 'Venezuela', 'Vietnam', 'Yemen', 'Zambia',
- 'Zimbabwe']
+countries = ['Russia', 'Germany', 'United Kingdom', 'France', 'Italy', 'Spain', 'Ukraine', 'Poland', 'Romania',
+              'Netherlands', 'Belgium', 'Czechia', 'Greece', 'Portugal', 'Sweden', 'Hungary', 'Belarus', 'Austria',
+              'Serbia', 'Switzerland', 'Bulgaria', 'Denmark', 'Finland', 'Slovakia', 'Norway', 'Ireland', 'Croatia',
+              'Moldova', 'Bosnia and Herzegovina', 'Albania', 'Lithuania', 'North Macedonia', 'Slovenia', 'Latvia',
+              'Kosovo', 'Estonia', 'Montenegro', 'Luxembourg', 'Malta', 'Iceland', 'Andorra', 'Monaco', 'Liechtenstein',
+              'San Marino', 'Holy See']
 
 # Now we filter the df to only return values for the above countries in the list.
 df = df.loc[df['Entity'].isin(countries)]
 
 print("We now have a total of: ", df['Entity'].nunique(), "having removed all continents and unwanted countries",
-      "with an expected total of 193, which in our case is correct.", "\n")
+      "with an expected total of 45, which in our case is correct as per file limitations.", "\n")
 
 print("Below are the number of missing values within each column present: ", "\n", "\n", df.isnull().sum(), "\n")
 
