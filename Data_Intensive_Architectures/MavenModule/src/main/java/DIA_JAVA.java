@@ -11,19 +11,19 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
 public class DIA_JAVA{
 
-    public static class DeathMapper extends Mapper < Object, Text, Text, Text > {
+    public static class FertMapper extends Mapper < Object, Text, Text, Text > {
         public void map(Object key, Text value, Context context) throws IOException, InterruptedException {
             String record = value.toString(); //Read each record
             String[] parts = record.split(","); // Parse CSV file
-            context.write(new Text(parts[0]), new Text("COUNTRY " + parts[1] + ":" + parts[2])); //Country name, Country code, total of Annual Deaths
+            context.write(new Text(parts[1]), new Text("FERT: " + parts[0] + ":" + parts[3])); //Country code, Country name, fertility rates
         }
     }
 
-    public static class FertilityMapper extends Mapper < Object, Text, Text, Text > {
+    public static class DeathMapper extends Mapper < Object, Text, Text, Text > {
         public void map(Object key, Text value, Context context) throws IOException, InterruptedException {
             String record = value.toString(); // Read each record
             String[] parts =record.split(","); // Parse CSV File
-            context.write(new Text (parts[0]), new Text ("FERT  "+ parts[3])); // Country name and fertility rate
+            context.write(new Text (parts[0]), new Text ("DEATH  "+ parts[2])); // Country code and number of deaths
         }
     }
 
@@ -38,25 +38,25 @@ public class DIA_JAVA{
     public static class ReduceJoinReducer extends Reducer < Text, Text, Text, Text > {
         public void reduce(Text key, Iterable<Text> values, Reducer.Context context) throws IOException, InterruptedException {
             String country = "";
-            double total_fert = 0.0;
             double total_death = 0.0;
+            double total_fert = 0.0;
             //int count = 0;
             /* Here is where the logic of the JOIN / reduction is laid out
                 In this case this sections counts the number of customers and the number of transactions per customer along with their value */
-            for (Text t : values) {
-                String parts[] = t.toString().split(" ");
-                if (parts[0].equals("FERT ")) {
+            for (Text t: values) {
+                String parts[] = t.toString().split(":");
+                if (parts[0].equals("DEATH")) {
                     //count++; // count the number of deaths
-                    total_fert += Float.parseFloat(parts[1]); // add up the fertility rate from the fertility vs contraception file
+                    total_death += Float.parseFloat(parts[1]); // add up the number of annual deaths recorded.
 
-                } else if (parts[0].equals("COUNTRY ")) {
-                    country = parts[1];
+                } else if (parts[0].equals("FERT")) {
+                    country = parts[1]; // add up the fertility rate
                     total_death = Float.parseFloat(parts[2]);
                 }
                 ; // count the number of customers
             }
 
-            String str = String.format("%.2f\t%.2f", total_fert, total_death);
+            String str = String.format("%.2f\t%.2f", total_death, total_fert );
             context.write(new Text(country), new Text(str));
 
         }
@@ -69,8 +69,8 @@ public class DIA_JAVA{
         job.setReducerClass(ReduceJoinReducer.class);
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(Text.class);
-        MultipleInputs.addInputPath(job, new Path(args[0]), TextInputFormat.class, DeathMapper.class);
-        MultipleInputs.addInputPath(job, new Path(args[1]), TextInputFormat.class, FertilityMapper.class);
+        MultipleInputs.addInputPath(job, new Path(args[0]), TextInputFormat.class, FertMapper.class);
+        MultipleInputs.addInputPath(job, new Path(args[1]), TextInputFormat.class, DeathMapper.class);
 //        MultipleInputs.addInputPath(job, new Path(args[2]), TextInputFormat.class, ContraceptiveMapper.class);
         Path outputPath = new Path(args[2]);
         FileOutputFormat.setOutputPath(job, outputPath);
