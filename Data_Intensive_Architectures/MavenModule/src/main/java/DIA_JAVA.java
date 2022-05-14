@@ -15,7 +15,7 @@ public class DIA_JAVA{
         public void map(Object key, Text value, Context context) throws IOException, InterruptedException {
             String record = value.toString(); //Read each record
             String[] parts = record.split(","); // Parse CSV file
-            context.write(new Text(parts[0]), new Text("COUNTRY " + parts[1])); //Label Countries
+            context.write(new Text(parts[0]), new Text("COUNTRY " + parts[1] + ":" + parts[2])); //Country name, Country code, total of Annual Deaths
         }
     }
 
@@ -23,7 +23,7 @@ public class DIA_JAVA{
         public void map(Object key, Text value, Context context) throws IOException, InterruptedException {
             String record = value.toString(); // Read each record
             String[] parts =record.split(","); // Parse CSV File
-            context.write(new Text (parts[0]), new Text ("DEATH "+ parts[3])); // Label Deaths
+            context.write(new Text (parts[0]), new Text ("FERT  "+ parts[3])); // Country name and fertility rate
         }
     }
 
@@ -37,25 +37,27 @@ public class DIA_JAVA{
 
     public static class ReduceJoinReducer extends Reducer < Text, Text, Text, Text > {
         public void reduce(Text key, Iterable<Text> values, Reducer.Context context) throws IOException, InterruptedException {
-            String name = "";
-            double total = 0.0;
-            int count = 0;
+            String country = "";
+            double total_fert = 0.0;
+            double total_death = 0.0;
+            //int count = 0;
             /* Here is where the logic of the JOIN / reduction is laid out
                 In this case this sections counts the number of customers and the number of transactions per customer along with their value */
             for (Text t : values) {
                 String parts[] = t.toString().split(" ");
-                if (parts[0].equals("DEATH ")) {
-                    count++; // count the number of deaths
-                    total += Float.parseFloat(parts[1]); // add up the number of deaths for every year
+                if (parts[0].equals("FERT ")) {
+                    //count++; // count the number of deaths
+                    total_fert += Float.parseFloat(parts[1]); // add up the fertility rate from the fertility vs contraception file
 
                 } else if (parts[0].equals("COUNTRY ")) {
-                    name = parts[1];
+                    country = parts[1];
+                    total_death = Float.parseFloat(parts[2]);
                 }
                 ; // count the number of customers
             }
 
-            String str = String.format("%d %.2f", count, total);
-            context.write(new Text(name), new Text(str));
+            String str = String.format("%.2f\t%.2f", total_fert, total_death);
+            context.write(new Text(country), new Text(str));
 
         }
     }
