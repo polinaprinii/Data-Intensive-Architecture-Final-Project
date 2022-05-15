@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 
 # Importing our dataframe:
 df = pd.read_csv('/Users/polinaprinii/Documents/GitHub/Data-Intensive-Architecture-Final-Project/Data_Intensive_Architectures/Output/Final_Data.csv')
-print(df.head(5))
+print(df.head(5), '\n')
 
 # Assigning our x (independent) and y dependent variables.
 x = df['Average_Fertility_Rate'].values
@@ -18,6 +18,7 @@ model = stats.linregress( x, y )
 # Evaluating results
 print('The R-squared value for the linear relationship between "Total Number of Deaths" and "Average Fertility Rate" is: ',
       round(model.rvalue, 2), '\n')
+
 
 # We now convert out our Total Number of Deaths from billions to a singular number to by diving by 1000 million.
 df['Total_Number_of_Deaths'] = df.groupby('Country')['Total_Number_of_Deaths'].transform(lambda x: round((x / 1000000), 2))
@@ -52,13 +53,15 @@ sns.set(rc = {'figure.figsize':(15,20)})
 plot_E = sns.barplot(x="Total_Number_of_Deaths", y="Country", data=df,
                    order=plot_order_E) #.set(title='Europe View of Annual Deaths Over 70 Years')
 plot_E.bar_label(plot_E.containers[0])
-plot_E.set_xlabel("Total Number of Deaths in 100 Millions", fontsize = 35)
-plot_E.set_ylabel("Country", fontsize = 35)
+plot_E.set_xlabel("Total Number of Deaths in 100 Millions", fontsize = 25)
+plot_E.set_ylabel("Country", fontsize = 25)
 plt.show()
 
-# Now we look at the average fertility rate for Europe:
-df_group = df.groupby(['Country'])['Total_Number_of_Deaths'].sum()
-df_group.plot.pie(figsize=(15,15), autopct="%.2f")
+# Now we look at the average fertility rate for Europe in a Pie format:
+country_data = df["Country"]
+fertility_data = df["Average_Fertility_Rate"]
+plt.pie(fertility_data, labels=country_data, autopct='%1.1f%%', shadow=True, startangle=140)
+plt.title("Average Fertility Rate within Europe Over 70 Years")
 plt.show()
 
 
