@@ -46,7 +46,7 @@ countries = ['Russia', 'Germany', 'United Kingdom', 'France', 'Italy', 'Spain', 
 # Now we filter the df to only return values for the above countries in the list.
 df = df.loc[df['Country'].isin(countries)]
 
-# Now we replot a Europe view of total number of deaths:
+# Now we re-plot a Europe view of total number of deaths:
 plot_order_E = df.groupby('Country')['Total_Number_of_Deaths'].sum().sort_values(ascending=False).index.values
 sns.set(rc = {'figure.figsize':(15,20)})
 plot_E = sns.barplot(x="Total_Number_of_Deaths", y="Country", data=df,
@@ -56,6 +56,10 @@ plot_E.set_xlabel("Total Number of Deaths in 100 Millions", fontsize = 35)
 plot_E.set_ylabel("Country", fontsize = 35)
 plt.show()
 
+# Now we look at the average fertility rate for Europe:
+df_group = df.groupby(['Country'])['Total_Number_of_Deaths'].sum()
+df_group.plot.pie(figsize=(15,15), autopct="%.2f")
+plt.show()
 
 
 
