@@ -20,6 +20,10 @@ for col in df.columns:
 
 print("\n")
 
+# Check for null values:
+print("Below are the number of missing values within each column present: ", "\n", "\n", df.isnull().sum(), "\n")
+
+
 # Next we drop the column 'Continent'
 df = df.drop('Continent', 1)
 
