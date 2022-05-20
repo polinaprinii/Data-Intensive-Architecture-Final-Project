@@ -64,6 +64,14 @@ plt.pie(fertility_data, labels=country_data, autopct='%1.1f%%', shadow=True, sta
 plt.title("Average Fertility Rate within Europe Over 70 Years")
 plt.show()
 
+# Determining Pearson's correlation between the data.
+# Mapping our dataframe to a correlation matrix.
+cor = df.corr(method='pearson')
+
+# Plotting the matrix.
+plt.figure(figsize = (20, 10))
+sns.heatmap(cor, annot = True)
+plt.show()
 
 
 
